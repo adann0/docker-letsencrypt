@@ -1,4 +1,4 @@
-# docker-letsencrypt
+# docker-nginx-letsencrypt
 
     $ git clone https://github.com/adann0/docker-letsencrypt.git && cd docker-letsencrypt/dev
     
