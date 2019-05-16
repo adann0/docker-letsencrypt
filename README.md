@@ -1,7 +1,5 @@
 # docker-letsencrypt
 
-# Let's Encrypt
-
     $ git clone https://github.com/adann0/docker-letsencrypt.git && cd docker-letsencrypt/dev
     
 _Change the value "example.com" by our domain name in nginx.conf._
