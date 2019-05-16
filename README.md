@@ -7,14 +7,14 @@ _Change the value "example.com" by our domain name in nginx.conf._
     $ nano nginx/nginx.conf
     $ docker-compose up -d
 
-Verify that you can access to your website. Then change the example values again and run the command :
+Verify that you can access to your website. Then change the example values again and run the command, if you use Armv7 you can use this image of Certbot, if you're on Amd64 replace it with the official one :
 
     $ sudo docker run -it --rm \
     -v /mnt/config/letsencrypt/etc:/etc/letsencrypt \
     -v /mnt/config/letsencrypt/var:/var/lib/letsencrypt \
     -v /mnt/www/example.com:/data/letsencrypt \
     -v /mnt/config/letsencrypt/logs:/var/log/letsencrypt \
-    certbot:armv7 \
+    adann0/certbot:armv7 \
     certonly --webroot \
     --email mail@example.com --agree-tos --no-eff-email \
     --webroot-path=/data/letsencrypt \
@@ -23,17 +23,15 @@ Verify that you can access to your website. Then change the example values again
 Once we have the certificates we can stop the temporary website :
 
     $ docker-compose down
-    $ cd ../prod
     
 Now for the production, again change the values in nginx.conf :
 
-    $ nano nginx/nginx.conf
-    $ mv nginx/nginx.conf /mnt/config/nginx/
+    $ cd ../prod &&
+    nano nginx/nginx.conf
     
 And make a certificate :
 
-    $ mkdir -p /mnt/config/ssl/certs/
-    $ sudo openssl dhparam -out /mnt/config/ssl/certs/dhparam-2048.pem 2048
+    $ sudo openssl dhparam -out dhparam-2048.pem 2048
     
 To test the site in HTTPS :
 
