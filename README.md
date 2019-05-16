@@ -10,10 +10,10 @@ _Change the value "example.com" by our domain name in nginx.conf._
 Verify that you can access to your website. Then change the example values again and run the command, if you use Armv7 you can use this image of Certbot, if you're on Amd64 replace it with the official one :
 
     $ sudo docker run -it --rm \
-    -v /mnt/config/letsencrypt/etc:/etc/letsencrypt \
-    -v /mnt/config/letsencrypt/var:/var/lib/letsencrypt \
-    -v /mnt/www/example.com:/data/letsencrypt \
-    -v /mnt/config/letsencrypt/logs:/var/log/letsencrypt \
+    -v ./letsencrypt/etc:/etc/letsencrypt \
+    -v ./letsencrypt/var:/var/lib/letsencrypt \
+    -v ./letsencrypt/logs:/var/log/letsencrypt \
+    -v ./html:/data/letsencrypt \
     adann0/certbot:armv7 \
     certonly --webroot \
     --email mail@example.com --agree-tos --no-eff-email \
