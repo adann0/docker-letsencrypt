@@ -12,8 +12,8 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./html:/usr/share/nginx/html/example.com
       - ./ssl/certs/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-      - ./letsencrypt/etc/live/rev3.tk/fullchain.pem:/etc/letsencrypt/live/example.com/fullchain.pem
-      - ./letsencrypt/etc/live/rev3.tk/privkey.pem:/etc/letsencrypt/live/example.com/privkey.pem
+      - ./letsencrypt/etc/live/example.com/fullchain.pem:/etc/letsencrypt/live/example.com/fullchain.pem
+      - ./letsencrypt/etc/live/example.com/privkey.pem:/etc/letsencrypt/live/example.com/privkey.pem
     networks:
       - docker-network
 
