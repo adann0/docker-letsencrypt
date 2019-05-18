@@ -2,9 +2,13 @@
 
     $ git clone https://github.com/adann0/docker-letsencrypt.git && cd docker-letsencrypt/dev
     
-_Change the value "example.com" by our domain name in nginx.conf._
+_Change the value "example.com" by our domain name in nginx.conf and docker-compose.yml._
 
     $ nano nginx/nginx.conf
+    $ nano docker-compose.yml
+    
+Then :
+
     $ docker-compose up -d
 
 Verify that you can access to your website. Then change the example values again and run the command, if you use Armv7 you can use this image of Certbot, if you're on Amd64 replace it with the official one :
