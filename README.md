@@ -11,13 +11,13 @@ Then :
 
     $ docker-compose up -d
 
-Verify that you can access to your website. Then change the example values again and run the command, if you use Armv7 you can use this image of Certbot, if you're on Amd64 replace it with the official one :
+Verify that you can access to your website. Then change the example values again, make directory and subdirectory for letsencrypt and run the command, if you use Armv7 you can use this image of Certbot, if you're on Amd64 replace it with the official one :
 
     $ sudo docker run -it --rm \
-    -v ./letsencrypt/etc:/etc/letsencrypt \
-    -v ./letsencrypt/var:/var/lib/letsencrypt \
-    -v ./letsencrypt/logs:/var/log/letsencrypt \
-    -v ./html:/data/letsencrypt \
+    -v /path/to/<your_directory>/letsencrypt/etc:/etc/letsencrypt \
+    -v /path/to/<your_directory>/letsencrypt/var:/var/lib/letsencrypt \
+    -v /path/to/<your_directory>/letsencrypt/logs:/var/log/letsencrypt \
+    -v /path/to/docker-letsencrypt/dev/html:/data/letsencrypt \
     adann0/certbot:armv7 \
     certonly --webroot \
     --email mail@example.com --agree-tos --no-eff-email \
@@ -28,10 +28,12 @@ Once we have the certificates we can stop the temporary website :
 
     $ docker-compose down
     
-Now for the production, again change the values in nginx.conf :
+Now for the production, again change the values in nginx.conf and docker-compose.yml :
 
-    $ cd ../prod &&
-    nano nginx/nginx.conf
+    $ cd ../prod
+    $ nano nginx/nginx.conf
+    $ nano docker-compose.yml
+
     
 And make a certificate :
 
@@ -46,7 +48,7 @@ Now to make the renewall of the certificate (on all masters node) :
 
     $ sudo crontab -e
     
-    0 23 * * * docker run --rm -it --name certbot -v "/mnt/config/letsencrypt/etc:/etc/letsencrypt" -v "/mnt/config/letsencrypt/lib:/var/lib/letsencrypt" -v "/mnt/www/rev3.tk:/data/letsencrypt" -v "/mnt/config/letsencrypt/logs:/var/log/letsencrypt" certbot:Dockerfile renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP production-nginx-container
+    0 23 * * * docker run --rm -it --name certbot -v "/mnt/config/letsencrypt/etc:/etc/letsencrypt" -v "/mnt/config/letsencrypt/lib:/var/lib/letsencrypt" -v "/mnt/www/rev3.tk:/data/letsencrypt" -v "/mnt/config/letsencrypt/logs:/var/log/letsencrypt" adann0/certbot:armv7 renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP production-nginx-container
 
 # Sources :
 
