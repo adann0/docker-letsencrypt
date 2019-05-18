@@ -44,11 +44,11 @@ To test the site in HTTPS :
     $ docker-compose up -d
     $ docker-compose down
 
-Now to make the renewall of the certificate (on all masters node) :
+To make the renewall of the certificate :
 
     $ sudo crontab -e
     
-    0 23 * * * docker run --rm -it --name certbot -v "/mnt/config/letsencrypt/etc:/etc/letsencrypt" -v "/mnt/config/letsencrypt/lib:/var/lib/letsencrypt" -v "/mnt/www/rev3.tk:/data/letsencrypt" -v "/mnt/config/letsencrypt/logs:/var/log/letsencrypt" adann0/certbot:armv7 renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP production-nginx-container
+    0 23 * * * docker run --rm -it --name certbot -v "/path/to/letsencrypt/etc:/etc/letsencrypt" -v "/path/to/letsencrypt/lib:/var/lib/letsencrypt" -v "/path/to/www/example.com:/data/letsencrypt" -v "/path/to/letsencrypt/logs:/var/log/letsencrypt" adann0/certbot:armv7 renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP production-nginx-container
 
 # Sources :
 
