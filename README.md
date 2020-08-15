@@ -1,5 +1,7 @@
 # docker-nginx-letsencrypt
 
+** THIS REPO IS NO LONGER SUPPORTED. Don't use it for security reason or make your own with new updated packages. **
+
     $ git clone https://github.com/adann0/docker-letsencrypt.git && cd docker-letsencrypt/dev
     
 _Change the value "example.com" by our domain name in nginx.conf and docker-compose.yml._
